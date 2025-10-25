@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getBooks } from "../../../_service/books";
+import { deleteBooks, getBooks } from "../../../_service/books";
 import { getGenres } from "../../../_service/genres";
 import { Link } from "react-router-dom";
 import { getAuthors } from "../../../_service/authors";
@@ -39,6 +39,20 @@ export default function AdminBooks() {
     setOpenDropdownId(openDropdownId === id ? null : id)
   }
   
+  {/*  delete data*/}
+
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this books ?");
+    if (confirmDelete) {
+      try{
+        await deleteBooks(id);
+        setBooks(books.filter((books) => books.id !== id ))
+      } catch (error) {
+        console.log(error);
+        
+      }
+    }
+  }
   return (
     <>
       <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
@@ -179,7 +193,9 @@ export default function AdminBooks() {
                           </li>
                         </ul>
                         <div className="py-1">
-                          <button className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                          <button
+                          onClick={() => handleDelete(books.id)}
+                          className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                              Delete 
                           </button>
                         </div>
