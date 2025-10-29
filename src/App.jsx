@@ -13,6 +13,10 @@ import AdminTransactions from "./pages/admin/transactions";
 import GenresCreate from "./pages/admin/genres/create";
 import AdminAuthors from "./pages/admin/authors";
 import AuthorsCreate from "./pages/admin/authors/create";
+import BooksEdit from "./pages/admin/books/edit";
+import AuthorsEdit from "./pages/admin/authors/edit";
+import GenresEdit from "./pages/admin/genres/edit";
+import ShowBooks from "./pages/public/books/show";
 function App() {
   return (
     <>
@@ -21,7 +25,10 @@ function App() {
           {/* Public*/}
           <Route element={<PublicLayout />}>
             <Route index element={<Home/>} />
-            <Route path="books" element={<Books/>} />
+            <Route path="books">
+              <Route index element={<Books/>}></Route>
+              <Route path= "show/:id" element={<ShowBooks/>}></Route>
+            </Route>
           </Route>
           {/*Auth */}
           <Route path="login" element={<Login/>}/>
@@ -33,15 +40,18 @@ function App() {
             <Route path="books">
               <Route index element={<AdminBooks/>} />
               <Route path="create" element={<BooksCreate/>} />
+              <Route path="edit/:id" element={<BooksEdit/>} />
             </Route>
 
             <Route path="genres"> 
               <Route index element={<AdminGenres />} />
               <Route path="create" element={<GenresCreate />} />
+              <Route path="edit/:id" element={<GenresEdit/>} />
             </Route>
             <Route path="authors"> 
               <Route index element={<AdminAuthors />} />
               <Route path="create" element={<AuthorsCreate />} />
+              <Route path="edit/:id" element={<AuthorsEdit/>} />
               
             </Route>
             <Route path="transactions">

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getGenres } from "../../../_service/genres";
+import { deleteGenres, getGenres } from "../../../_service/genres";
 import { Link } from "react-router-dom";
 
 export default function AdminGenres() {
@@ -18,6 +18,18 @@ export default function AdminGenres() {
     setOpenDropdownId(openDropdownId === id ? null : id);
   };
 
+  const handleDelete = async (id) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this genres ?");
+        if (confirmDelete) {
+          try{
+            await deleteGenres(id);
+            setGenres(genres.filter((genres) => genres.id !== id ))
+          } catch (error) {
+            console.log(error);
+            
+          }
+        }
+      }
   return (
     <>
       <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
@@ -141,7 +153,9 @@ export default function AdminGenres() {
                               </li>
                             </ul>
                             <div className="py-1">
-                              <button className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                              <button 
+                              onClick={() => handleDelete(genre.id)}
+                              className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                                 Delete
                               </button>
                             </div>
