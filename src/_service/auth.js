@@ -4,9 +4,10 @@ import { API } from "../_api";
 export const login = async ({email, password}) => {
   try {
     const { data } = await API.post('/login', {email, password})
+    localStorage.setItem("accessToken", data.accesstoken);
     return data
   } catch (error) {
-    console.log();
+    console.log(error);
     throw error
   }
 }

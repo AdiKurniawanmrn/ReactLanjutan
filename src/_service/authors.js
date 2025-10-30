@@ -6,7 +6,12 @@ export const getAuthors= async() => {
 
 export const createAuthors = async (formData) => {
   try {
-    const response = await API.post("/authors", formData)
+    const response = await API.post("/authors", formData,  {
+      //bagian fungis untuk yang memerlukan login
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('accessToken')}`
+      }
+  })
     return response.data
   } catch (error) {
     console.error(error)
@@ -27,7 +32,12 @@ export const showAuthors = async (id) => {
 
 export const updateAuthors = async (id, data) => {
    try {
-    const response = await API.post (`/authors/${id}`, data)
+    const response = await API.post (`/authors/${id}`, data,  {
+      //bagian fungis untuk yang memerlukan login
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('accessToken')}`
+      }
+  })
     return response.data
   } catch (error){
     console.log (error);
@@ -38,7 +48,12 @@ export const updateAuthors = async (id, data) => {
 
 export const deleteAuthors= async (id) => {
   try {
-    await API.delete (`/authors/${id}`)
+    await API.delete (`/authors/${id}`,  {
+      //bagian fungis untuk yang memerlukan login
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('accessToken')}`
+      }
+  })
   } catch (error){
     console.log (error);
     throw error

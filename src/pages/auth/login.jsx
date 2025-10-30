@@ -51,7 +51,6 @@
       useEffect(() => {
         if (token && decodedData && decodedData.success) {
           navigate ("/admin")
-          
         }
       },  [token, decodedData, navigate])
       

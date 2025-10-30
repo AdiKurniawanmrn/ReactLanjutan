@@ -6,6 +6,8 @@ import { BooksImageStorage } from "../../../_api";
 export default function ShowBooks() {
   const { id } = useParams();
   const [books, setBooks] = useState([]);
+  // const [quantity, setQuantity] = useState (1);
+
   useEffect(() => {
     const fetchData = async () => {
       const [booksData] = await Promise.all([showBooks(id)]);
@@ -13,6 +15,23 @@ export default function ShowBooks() {
     };
     fetchData();
   }, [id]);
+
+  // const handleSubmit = async (e) => {
+  //     e.preventDefault();
+  
+  //     try {
+  //       const payload = new FormData();
+  //       for (const key in formData) {
+  //         payload.append(key, formData[key]);
+  //       }
+  
+  //       await createBooks(payload);
+  //       navigate("/admin/books");
+  //     } catch (error) {
+  //       console.log(error);
+  //       alert("Error creating book");
+  //     }
+  //   };
   return (
     <>
       <section className="py-8 bg-white md:py-16 dark:bg-gray-900 antialiased">
@@ -106,31 +125,12 @@ export default function ShowBooks() {
               </div>
 
               <div className="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
-                <a
+                <button
                   href="#"
-                  title=""
                   class="text-white mt-4 sm:mt-0 bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-indigo-600 dark:hover:bg-indigo-700 focus:outline-none dark:focus:ring-indigo-800 flex items-center justify-center"
-                  role="button"
                 >
-                  <svg
-                    class="w-5 h-5 -ms-2 me-2"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6"
-                    />
-                  </svg>
-                  Add to cart
-                </a>
+                  Beli Sekarang
+                </button>
               </div>
 
               <hr className="my-6 md:my-8 border-gray-200 dark:border-gray-800" />

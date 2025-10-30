@@ -7,7 +7,12 @@ export const getGenres = async () => {
 
 export const createGenres = async (data) => {
   try {
-    const response = await API.post("/genres", data);
+    const response = await API.post("/genres", data,  {
+      //bagian fungis untuk yang memerlukan login
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('accessToken')}`
+      }
+  });
     return response.data;
   } catch (error) {
     console.log(error);
@@ -28,7 +33,12 @@ export const showGenres = async (id) => {
 
 export const updateGenres = async (id, data) => {
    try {
-    const response = await API.post (`/genres/${id}`, data)
+    const response = await API.post (`/genres/${id}`, data,  {
+      //bagian fungis untuk yang memerlukan login
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('accessToken')}`
+      }
+  })
     return response.data
   } catch (error){
     console.log (error);
@@ -39,7 +49,12 @@ export const updateGenres = async (id, data) => {
 
 export const deleteGenres= async (id) => {
   try {
-    await API.delete (`/genres/${id}`)
+    await API.delete (`/genres/${id}`, {
+      //bagian fungis untuk yang memerlukan login
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('accessToken')}`
+      }
+  })
   } catch (error){
     console.log (error);
     throw error
